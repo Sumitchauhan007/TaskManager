@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Michroma&family=Outfit:wght@100..900&family=Teko:wght@300..700&family=Tektur:wght@400..900&display=swap');
+@import "tailwindcss";
+
+@theme{
+  --font-display: "Michroma", "sans-serif";
+  --breakpoint-3x: 1920px;
+  --color-primary: #1368EC;
+
+}
+
+@layer base{
+  html {
+    font-family: var(--font--display);
+
+  }
+  body{
+    background-color: #fcfbfc;
+    overflow-x: hidden;
+  }
+}
+
