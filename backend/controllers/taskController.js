@@ -360,8 +360,43 @@ const getUserDashboardData = async (req, res) => {
        const taskDistribution = taskStatuses.reduce((acc,status) => {
         const formattedKey = status.replace(/\s+/g, "");
         acc[formattedKey] = 
-        task
-       })
+        taskDistributionRaw.find((item) => item._id === status)?.count || 0;
+        return acc;
+       }, {});
+       taskDistribution["All"] = totalTasks;
+
+       //task distribution by priority
+       const taskPriorities = ["Low", "Medium" , "High"];
+       const taskPriorityLevelsRaw = await Task.aggregate([
+        {$match: { assignedTo: userId} },
+        { $group: { _id: "$priority" , count: {$sum: 1}}},
+       ]);
+       
+       const taskPriorityLevels = taskPriorities.reduce((acc,priority) => {
+        acc[priority] =
+        taskPriorityLevelsRaw.find((item) => item._id === priority)?.count || 0;
+        return acc;
+       }, {});
+
+       //fetch recent 10 tasks for the logged  in user
+       const recentTasks = await Task.find({ assignedTo: userId})
+       .sort({createdAt: -1})
+       .limit(10)
+       .select("title status priority dueDate createdAt");
+
+       res.status(200).json ({
+        statistics:{
+            totalTasks,
+            pendingTasks,
+            completedTasks,
+            overdueTasks,
+        },
+        charts:{
+            taskDistribution,
+            taskPriorityLevels,
+        },
+        recentTasks,
+       }); 
     } catch (error) {
         res.status(500).json({ message: "Server error", error: error.message });
     }
