@@ -46,7 +46,13 @@ const SignUp = () => {
         <form onSubmit={handleSignUp}>
           <ProfilePhotoSelector image={profilrPic} setImage={setProfilePic}/>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input value={fullName}
+            onChange={({ target }) => setFullName(target.value)}
+            label="Full Name"
+            placeholder="John Wick"
+            type="text"/>
+          </div>
         </form>
       </div>
     </AuthLayout>
