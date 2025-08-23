@@ -5,6 +5,7 @@ import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
 import Input from '../../components/inputs/Input';
 import { Link,useNavigate } from 'react-router-dom';
 
+
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [fullName, setFullName] = useState("");
