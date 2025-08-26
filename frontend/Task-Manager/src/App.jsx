@@ -10,11 +10,9 @@ import SignUp from './pages/Auth/SignUp';
 import ManageTasks from './pages/Admin/ManageTasks';
 import CreateTask from './pages/Admin/CreateTask';
 import ManageUsers from './pages/Admin/ManageUsers';
-
 import UserDashboard from './pages/User/UserDashboard';
 import MyTasks from './pages/User/MyTasks';
 import ViewTaskDetails from './pages/User/ViewTaskDetails';
-
 import PrivateRoute from './routes/PrivateRoute';
 import UserProvider from './context/userContext';
 
