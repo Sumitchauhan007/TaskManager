@@ -39,7 +39,7 @@ const Login = () => {
 
      if(token) {
       localStorage.setItem("token" , token);
-      updateUser()
+      updateUser()//comment
 
       //redirect based on role
       if (role === "admin") {
