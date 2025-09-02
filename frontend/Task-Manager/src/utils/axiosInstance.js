@@ -26,24 +26,23 @@ axiosInstance.interceptors.request.use(
 
 // response Interceptor
 axiosInstance.interceptors.response.use(
-    (response) => {
-        return response;
-    },
-    (error) => {
-        //handle common errors globally
-        if (error.response) {
-            if(error.response.status === 401) {
-                //redirect to login page
-                window.location.href = "/login";
-            }else if (error.response.status === 500){
-                console.error("Server error. Please try again later.");
-            }
+  (response) => response,
+  (error) => {
+    if (error.response) {
+      const originalRequest = error.config;
 
-        }else if (error.code === "ECONNABORTED") {
-            console.error("Request timeout. Please try agian.");
-        }
-        return Promise.reject(error);
+      // Skip redirect if it's the login call
+      if (error.response.status === 401 && !originalRequest.url.includes("/auth/login")) {
+        window.location.href = "/login";
+      } else if (error.response.status === 500) {
+        console.error("Server error. Please try again later.");
+      }
+    } else if (error.code === "ECONNABORTED") {
+      console.error("Request timeout. Please try again.");
     }
+    return Promise.reject(error);
+  }
 );
+
 
 export default axiosInstance;
