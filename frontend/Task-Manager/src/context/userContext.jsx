@@ -1,19 +1,54 @@
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import React, { createContext, useState, useEffect } from "react";
+import axiosInstance from "../utils/axiosInstance";
+import { API_PATHS } from "../utils/apiPaths";
 
-export const useUserAuth = () => {
-  const { user, loading, clearUser } = useContext(UserContext);
-  const navigate = useNavigate();
+// ✅ Create context once
+export const UserContext = createContext(null);
+
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (loading) return; // ⛔ don’t redirect while still loading
-
-    if (!user) {
-      clearUser();
-      navigate("/login");
+    const accessToken = localStorage.getItem("token");
+    if (!accessToken) {
+      setLoading(false);
+      return;
     }
-  }, [user, loading, clearUser, navigate]);
 
-  return { user, loading, clearUser };
+    const fetchUser = async () => {
+      try {
+        const response = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE);
+        setUser(response.data);
+      } catch (error) {
+        console.error("User not authenticated", error);
+        clearUser();
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const updateUser = (userData) => {
+    setUser(userData);
+    if (userData?.token) {
+      localStorage.setItem("token", userData.token);
+    }
+    setLoading(false);
+  };
+
+  const clearUser = () => {
+    setUser(null);
+    localStorage.removeItem("token");
+  };
+
+  return (
+    <UserContext.Provider value={{ user, loading, updateUser, clearUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
+
+export default UserProvider;

@@ -16,7 +16,7 @@ import UserDashboard from './pages/User/UserDashboard';
 import MyTasks from './pages/User/MyTasks';
 import ViewTaskDetails from './pages/User/ViewTaskDetails';
 import PrivateRoute from './routes/PrivateRoute';
-import UserProvider, { UserContext } from './context/userContext';
+import UserProvider, { UserContext } from './context/UserContext';
 
 const App = () => {
   return (
