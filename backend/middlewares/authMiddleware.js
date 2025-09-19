@@ -11,7 +11,7 @@ const protect = async (req, res, next) => {
             token = token.split(" ")[1]; 
 
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            req.User = await User.findById(decoded.id).select("-password");
+            req.user = await User.findById(decoded.id).select("-password");
             next();
         } else {
             res.status(401).json({ message: "Not authorized, no token" });
@@ -23,7 +23,7 @@ const protect = async (req, res, next) => {
 
 // Middleware for admin access
 const adminOnly = (req, res, next) => {
-    if (req.User && req.User.role === "admin") {
+    if (req.user && req.user.role === "admin") {
         next();
     } else {
         res.status(403).json({ message: "Access denied, admin only" });

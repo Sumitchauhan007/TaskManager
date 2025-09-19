@@ -192,7 +192,7 @@ const updateTaskStatus = async(req,res) => {
         if (!task) return res.status(404).json({message: "Task not found"});
 
         const isAssigned = task.assignedTo.some(
-            (userId) => userId.toString() === req.user._id.tostring()
+            (userId) => userId.toString() === req.user._id.toString()
         );
 
         if(!isAssigned && req.user.role !== "admin") {

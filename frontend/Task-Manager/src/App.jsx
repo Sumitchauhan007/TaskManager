@@ -27,6 +27,7 @@ const App = () => {
           <Route path="/auth/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/unauthorized" element={<div>Unauthorized Access</div>} />
 
           {/* Default redirect handler */}
           <Route path="/" element={<Root />} />
@@ -40,7 +41,7 @@ const App = () => {
           </Route>
 
           {/* User routes */}
-          <Route element={<PrivateRoute allowedRoles={["user"]} />}>
+          <Route element={<PrivateRoute allowedRoles={["member"]} />}>
             <Route path="/user/dashboard" element={<UserDashboard />} />
             <Route path="/user/tasks" element={<MyTasks />} />
             <Route path="/user/task-details/:id" element={<ViewTaskDetails />} />
