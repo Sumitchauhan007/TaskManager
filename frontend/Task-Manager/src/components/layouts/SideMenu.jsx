@@ -1,9 +1,10 @@
 import React from "react";
 
-const SideMenu = () => {
-  return (
-    <div>SideMenu</div>
-  )
-}
+const SideMenu = ({ activeMenu }) => {
+    const {user ,clearUser} = useContext(UserContext);
+    const [SideMenuData, setSideMenuData] = useState([
+  return <div>SideMenu</div>;
+  
+}; 
 
 export default SideMenu;
