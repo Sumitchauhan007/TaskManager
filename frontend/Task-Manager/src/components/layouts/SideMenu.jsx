@@ -5,6 +5,6 @@ const SideMenu = ({ activeMenu }) => {
     const [SideMenuData, setSideMenuData] = useState([
   return <div>SideMenu</div>;
   
-}; 
+}; //comment
 
 export default SideMenu;
