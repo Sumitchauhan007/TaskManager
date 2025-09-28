@@ -6,7 +6,7 @@ import {
     LuLogout,
 } from "react-icons/lu";
 
-export const SIDE_MENU_ITEMS = [
+export const SIDE_MENU_DATA = [
     {
         id: "01",
         label: "Dashboard",

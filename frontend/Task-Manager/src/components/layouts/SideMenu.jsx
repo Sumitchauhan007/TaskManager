@@ -49,7 +49,6 @@ const SideMenu = ({ activeMenu }) => {
     </h5>
 
     <p className="">{user?.email || ""}</p>
-    </div>
 
     {SideMenuData.map((item, index) => (
       <button 
