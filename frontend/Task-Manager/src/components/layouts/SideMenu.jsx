@@ -34,21 +34,21 @@ const SideMenu = ({ activeMenu }) => {
     <div className="">
       <img src={user?.profilePicture || ""}
        alt="Profile Image"
-       className=""
+       className="w-20 h-20 bg-slate-400 rounded -full"
         />
     </div>
 
     {user?.role === 'admin' && (
-      <div className="">
+      <div className="text-[10px] font-medium text-white bg-primary px-3 py-0.5 rounded mt-1">
         Admin
       </div>
     )}
 
-    <h5 className="">
+    <h5 className="text-gray-950 font-medium leading-6 mt-3">
       {user?.name || ""}
     </h5>
 
-    <p className="">{user?.email || ""}</p>
+    <p className="text-[12px] text-gray-500">{user?.email || ""}</p>
 
     {SideMenuData.map((item, index) => (
       <button 
@@ -59,7 +59,7 @@ const SideMenu = ({ activeMenu }) => {
      } py-3 px-6 mb-3 cursor-pointer`}
     onClick={() => handleClick(item.path)}
     >
-      <item.icon className="" />
+      <item.icon className="text-xl" />
       {item.label}
     </button>
   ))}

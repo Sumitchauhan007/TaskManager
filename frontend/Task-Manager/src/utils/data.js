@@ -3,7 +3,7 @@ import {
     LuUsers,
     LuClipboardCheck,
     LuSquarePlus,
-    LuLogout,
+    LuLogOut,  // Changed from LuLogout to LuLogOut
 } from "react-icons/lu";
 
 export const SIDE_MENU_DATA = [
@@ -11,19 +11,19 @@ export const SIDE_MENU_DATA = [
         id: "01",
         label: "Dashboard",
         icon: LuLayoutDashboard,
-        Path: "/admin/dashboard"
+        path: "/admin/dashboard"  // Changed from Path to path (lowercase)
     },
     {
         id: "02",
         icon: LuClipboardCheck,
         label: "Manage Tasks",
-        Path: "/admin/tasks"
+        path: "/admin/tasks"  // Changed from Path to path (lowercase)
     },
     {
         id: "03",
         icon: LuSquarePlus,
         label: "Create Task",
-        Path: "/admin/create-task"
+        path: "/admin/create-task"  // Changed from Path to path (lowercase)
     },
     {
         id: "04",
@@ -33,7 +33,7 @@ export const SIDE_MENU_DATA = [
     },
     {
         id: "05",
-        icon: LuLogout,
+        icon: LuLogOut,  // Changed from LuLogout to LuLogOut
         label: "Logout",
         path: "logout",
     },
@@ -54,7 +54,7 @@ export const SIDE_MENU_USER_DATA = [
     },
     {
         id: "03",
-        icon: LuLogout,
+        icon: LuLogOut,  // Changed from LuLogout to LuLogOut
         label: "Logout",
         path: "logout",
     },
