@@ -10,6 +10,8 @@ const InfoCard = ({icon, label, value, color}) => {
         <div>
           <p className='text-sm text-white'>{label}</p>
           <h3 className='text-xl md:text-2xl font-semibold text-white mt-1.5'>{value}</h3>
+
+          asdfghjkl;
         </div>
       </div>
     </div>
