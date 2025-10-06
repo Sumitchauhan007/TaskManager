@@ -8,7 +8,7 @@ const InfoCard = ({ icon, label, value, color }) => {
           {icon}
         </div>
         <div>
-          <p className='text-sm text-white'>{label}</p>
+          <p className='text-sm text-white'>{label}</p>vyvgbuhninjinhjb gfvftvyuy
           <h3 className='text-xl md:text-2xl font-semibold text-white mt-1.5'>{value}</h3>
 
 
