@@ -36,9 +36,11 @@ const TaskListTable = ({tableData}) => {
                 <td className=''>{task.name}</td>
             </tr>
         ))}
- 
-    
+      </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
-export default TaskListTable
+export default TaskListTable;
