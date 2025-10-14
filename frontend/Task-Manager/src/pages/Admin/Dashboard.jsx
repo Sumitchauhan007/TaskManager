@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { useUserAuth } from '../../hooks/useUserAuth'
 import { UserContext } from '../../context/UserContext';
 import DashboardLayout from '../../components/layouts/DashboardLayout';
-import { useNavigate } from 'react-router-dom';
+import { data, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import moment from 'moment';
@@ -22,6 +22,30 @@ const Dashboard = () => {
   const[pieChartData, setPieChartData] = useState([]);
   const[barChartData, setBarChartData] = useState([]);
 
+  //chart data preparation
+
+  const prepareChartData = (data) => {
+    const tasksDistribution = data?.tasksDistribution || null;
+    const taskPriorityLevels = data?.taskPriorityLevels || null;
+
+    const tasksDistributionData = [
+      {status: "Pending", count: tasksDistribution?.Pending || 0},
+      {status: "In Progress" , count: tasksDistribution?.InProgress || 0 },
+      {status: "Completed", count: tasksDistribution?.Completed || 0},
+    ];
+
+    setPieChartData(tasksDistributionData);
+
+    const PriorityLevelData = [
+      { priority: "Low" , count: taskPriorityLevels?.Low || 0},
+      {priority:"Medium" , count: taskPriorityLevels?.Medium || 0},
+      {priority:"High" , count: taskPriorityLevels?.High || 0},
+    ];
+
+    setBarChartData(PriorityLevelData);
+
+  };
+
   const getDashboardData = async() => {
     try {
       const response = await axiosInstance.get(
@@ -29,6 +53,7 @@ const Dashboard = () => {
       );
       if (response.data) {
         setDashboardData(response.data);
+        prepareChartData(response.data?.charts || null)
       }
     } catch (error) {
       console.error("Error fetching users :", error);
@@ -89,6 +114,19 @@ const Dashboard = () => {
   </div>
 
   <div className='grid grid-cols-1 md:grid-cols-2  gap-6 my-4 md:my-6'>
+
+    <div className='card'>
+      <div className='flex items-center justify-between'>
+        <h5 className='font-medium'>Task Distribution </h5>
+      </div>
+
+      <CustomPieChart 
+      data={pieChartData}
+      label="Total Balance"
+      colors={COLORS}
+      />
+    </div>
+    
     <div className='md:col-span-2'>
       <div className='card'>
         <div className='flex items-center justify-between'>
