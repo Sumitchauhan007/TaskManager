@@ -10,6 +10,9 @@ import { addThousandSeparators } from '../../utils/helper';
 import InfoCard from '../../components/Cards/InfoCard';
 import { LuArrowRight } from 'react-icons/lu';
 import TaskListTable from '../../components/TaskListTable';
+import CustomPieChart from '../../components/Charts/CustomPieChart';
+
+const COLORS =["#8D51FF", "#00B8Db" , "#7BCE00"];
 
 const Dashboard = () => {
   useUserAuth();
@@ -122,7 +125,6 @@ const Dashboard = () => {
 
       <CustomPieChart 
       data={pieChartData}
-      label="Total Balance"
       colors={COLORS}
       />
     </div>
