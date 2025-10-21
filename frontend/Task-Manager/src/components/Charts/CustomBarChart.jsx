@@ -5,7 +5,10 @@ const CustomBarChart = ({data}) => {
   return (
 
     //function to alternate colors
-
+    const getBarColor = (entry) => {
+     switch(entry?.priority) {
+      case 'Low' :
+     }
     
     <div>CustomBarChart</div>
   )
