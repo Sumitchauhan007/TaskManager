@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import {useLoaction, useNavigate} from "react-router-dom";
 import moment from "moment";
 import { LuTrash2 } from 'react-icons/lu';
+import SelectDropdown from '../../components/Inputs/SelectDropdown';
 
 const CreateTask = () => {
    
@@ -114,6 +115,19 @@ const CreateTask = () => {
                     handleValueChange("description", target.value)
                    }
                   />
+              </div>
+
+              <div className="grid grid-cols-12 gap-4 mt-2">
+                <div className="col-span-6 md:col-span-4">
+                  <label className="text-xs font-medium text-slate-600">Priority</label>
+
+                  <SelectDropdown 
+                  options={PRIORITY_DATA}
+                  value={taskData.priority}
+                  onChange={(value) => handleValueChange("priority", value)}
+                  placeholder="Select Priority"
+                  />
+                </div>
               </div>
           </div>
         </div>
