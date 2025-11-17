@@ -1,16 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { LuChevronDown } from 'react-icons/lu';
 
-/**
- * Lightweight dropdown/select component.
- * Props:
- * - options: [{ value, label }]
- * - value: currently selected value (string/number)
- * - onChange: (value) => void
- * - placeholder: string shown when no selection
- * - disabled: disable interaction
- * - className: extra wrapper classes
- */
+
 const SelectDropdown = ({
   options = [],
   value,
@@ -77,9 +68,8 @@ const SelectDropdown = ({
               role="option"
               aria-selected={option.value === value}
               onClick={() => handleSelect(option.value)}
-              className={`px-3 py-2 text-sm cursor-pointer hover:bg-indigo-50 ${
-                option.value === value ? 'bg-indigo-100 font-medium' : ''
-              }`}
+              className={`px-3 py-2 text-sm cursor-pointer hover:bg-indigo-50 ${option.value === value ? 'bg-indigo-100 font-medium' : ''
+                }`}
             >
               {option.label}
             </li>
