@@ -1,17 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import SelectDropdown from '../Inputs/SelectDropdown.jsx';
 
-/**
- * Generic Modal component providing backdrop, portal-like layering and basic accessibility.
- * Props:
- * - isOpen: boolean controls visibility
- * - onClose: function to call when request to close (backdrop click or ESC)
- * - title: optional string header
- * - children: modal body content
- * - footer: optional React node for custom actions (if absent, no footer shown)
- * - size: 'sm' | 'md' | 'lg' width presets
- * - closeOnBackdrop: boolean (default true)
- */
 export const Modal = ({
 	isOpen,
 	onClose,
