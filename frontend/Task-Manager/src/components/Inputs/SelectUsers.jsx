@@ -78,7 +78,7 @@ function SelectUsers({
                   {user.name}
                 </p>
                 <p className='text-sm text-gray-500'>{user.email}</p>
-              </div}
+              </div>
               <input
                 type="checkbox"
                 checked={tempSelectedUsers.includes(user.id)}
