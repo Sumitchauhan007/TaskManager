@@ -3,6 +3,7 @@ import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import { LuUsers } from 'react-icons/lu';
 import Modal from '../layouts/Modal';
+import AvatarGroup from '../layouts/AvatarGroup';
 
 function SelectUsers({
   selectedUsers,
@@ -49,7 +50,7 @@ function SelectUsers({
       setTempSelectedUsers([]);
     }
 
-    return () => { };
+    return () => {};
   }, [selectedUsers]);
 
   return (
@@ -61,20 +62,28 @@ function SelectUsers({
         </button>
       )}
 
+      {selectedUserAvatars.length > 0 && (
+        <div className="cursor-pointer" onClick={() => setIsModalOpen(true)}>
+          <AvatarGroup avatars={selectedUserAvatars} maxVisible={3}/>
+        </div>
+      )}
+
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title="Select Users"
       >
-        <div className="space-y-4 h-[60vh] overflow-y-auto">
+        <div className="space-y-4 h-[60vh] overflow-y-auto"> 
           {allUsers.map((user) => (
             <div
               key={user.id}
               className='flex items-center gap-4 p-3 border-b border-gray-200 '>
-              <img src={user.profileImageUrl} alt={user.name}
-                className='w-10 h-10 rounded-full' />
+              <img src={user.profileImageUrl}
+               alt={user.name}
+                className='w-10 h-10 rounded-full' 
+                />
               <div className='flex-1'>
-                <p className='font-medium '>
+                <p className='font-medium texxt-gray-888 dark:text-white'>
                   {user.name}
                 </p>
                 <p className='text-sm text-gray-500'>{user.email}</p>
@@ -83,12 +92,21 @@ function SelectUsers({
                 type="checkbox"
                 checked={tempSelectedUsers.includes(user.id)}
                 onChange={() => toggleUserSelection(user.id)}
-                className=''
+                className='w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm outline-none'
               />
             </div>
           ))}
         </div>
-      </Modal>
+
+        <div className="flex-justify-end gap-4 pt-4">
+          <button className='card-btn' onClick={() => setIsModalOpen(false)}>
+            CANCEL
+          </button>
+        <button className='card-btn-fill' onClick={handleAssign}>
+          DONE
+        </button>
+        </div>
+      </Modal> 
     </div>
   );
 };

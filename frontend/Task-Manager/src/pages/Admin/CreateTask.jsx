@@ -159,6 +159,19 @@ const CreateTask = () => {
                 </div>
 
               </div>
+
+              <div className="mt-3">
+                <label className='text-xs font-medium text-slate-600'>
+                  TODO Checklist
+                </label>
+
+                <TodoListInput
+                todoList={taskData?.todoChecklist}
+                setTodoList={(value) =>
+                  handleValueChange("todoChecklist", value)
+                }
+                />
+              </div>
           </div>
         </div>
       </div>
