@@ -110,5 +110,5 @@ const SelectUsers = ({
     </div>
   );
 };
-
+//selction of users for task assignment, with a modal to choose from all users and display selected users as avatars.
 export default SelectUsers;   
