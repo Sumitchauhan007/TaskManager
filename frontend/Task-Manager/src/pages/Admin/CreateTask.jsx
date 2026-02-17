@@ -9,7 +9,7 @@ import moment from "moment";
 import { LuTrash2 } from 'react-icons/lu';
 import SelectDropdown from '../../components/Inputs/SelectDropdown';
 import SelectUsers from '../../components/Inputs/SelectUsers';
-
+import AddAttachmentsInput from '../../components/Inputs/AddAttachmentsInput';
 const CreateTask = () => {
    
   const location = useLoaction();
@@ -171,6 +171,31 @@ const CreateTask = () => {
                   handleValueChange("todoChecklist", value)
                 }
                 />
+              </div>
+
+              <div className="mt-3">
+                <label className="text-xs font-medium text-slate-600" >
+                  Add Attachments
+                </label>
+
+                <AddAttachmentsInput
+                  attachments={taskData?.attachments}
+                  setAttachments={(value) =>
+                    handleValueChange("attachments", value)
+                  }
+                  />
+              </div>
+
+              {error && (
+                <p className="text-xs text-red-500 mt-2">
+                  {error}
+                </p>
+              )}
+
+              <div className='mt-4'>
+                <button className='card-btn w-full'>
+                  Create Task
+                </button>
               </div>
           </div>
         </div>
