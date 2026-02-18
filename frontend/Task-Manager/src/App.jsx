@@ -6,6 +6,7 @@ import {
   Outlet,
   Navigate
 } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
 import Dashboard from './pages/Admin/Dashboard';
 import Login from './pages/Auth/Login';
 import SignUp from './pages/Auth/SignUp';
@@ -48,9 +49,18 @@ const App = () => {
           </Route>
         </Routes>
       </Router>
+
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            fontSize: "13px",
+          },
+        }}
+      />
     </UserProvider>
-  )
-}
+  );
+};
 
 export default App;
 
