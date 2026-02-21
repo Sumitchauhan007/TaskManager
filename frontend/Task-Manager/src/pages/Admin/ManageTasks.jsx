@@ -49,6 +49,25 @@ navigate('/admin/create-task', { state:{ taskId: taskData._id } });
 
 // download task report
 const handleDownloadReport = async () => {
+  try {
+    const response = await axiosInstance.get(API_PATHS.REPORTS.EXPORT_TASKS, {
+      responseType: "blob",
+    });
+
+    //craete  url link for blob
+    const url = window.URL.createObjectURL(new Blob([respsonse.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "task_report.xlsx");
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  }
+  catch (error) {
+    console.error("Error downloading task report:", error);
+    toast.error("Failed to download task report. Please try again.");
+  }
 };
 
 useEffect(() => {
