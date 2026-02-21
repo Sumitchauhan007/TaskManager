@@ -3,7 +3,7 @@ import {HiMiniPlus,HiOutlineTrash} from "react-icons/hi2";
 
 
 const TodoListInput = ({todoList,setTodoList}) => {
- const [option,setOption] = useStat("");
+ const [option, setOption] = useState("");
 
  //function to handle adding an option
  const handleAddOption = () => {
@@ -38,7 +38,7 @@ const TodoListInput = ({todoList,setTodoList}) => {
         handleDeleteOption(index);
       }}
       >
-        <HiOutlineTrash className='text-lg text-red-500'/></button>
+        <HiOutlineTrash className='text-lg text-red-500'/>
       </button>
     </div>
   ))}
@@ -49,7 +49,7 @@ const TodoListInput = ({todoList,setTodoList}) => {
     placeholder='Enter Task'
     value={option}
     onChange={({ target }) => setOption(target.value)}
-    className='w-full text-[13px] text-blck outline-none bg-white border border-gray-100 px-3 py-2 rounded-md' 
+    className='w-full text-[13px] text-black outline-none bg-white border border-gray-100 px-3 py-2 rounded-md' 
     />
 
     <button className='card-btn text-nowrap' onClick={handleAddOption}>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
@@ -38,26 +38,27 @@ console.error("Error fetching users:", error);
 };
 
 // handle todo check
-const updateTodoChecklist = async (index) => {};
-const todoChecklist = [...task?.todoChecklist];
-const taskId = id;
+const updateTodoChecklist = async (index) => {
+  const todoChecklist = [...task?.todoChecklist];
+  const taskId = id;
 
-if (todoChecklist && todoChecklist[index]) {
-todoChecklist[index].completed = !todoChecklist[index].completed;
-try {
-const response = await axiosInstance.put(
-API_PATHS.TASKS.UPDATE_TODO_CHECKLIST(taskId),
-{ todoChecklist }
-);
-if (response.status === 200) {
-setTask(response.data?.task || task);
-} else
-// Optionally revert the toggle if the API call fails.
-todoChecklist[index].completed = !todoChecklist[index].completed;
-}
-catch (error) {
-todoChecklist[index].completed = !todoChecklist[index].completed;
-}
+  if (todoChecklist && todoChecklist[index]) {
+    todoChecklist[index].completed = !todoChecklist[index].completed;
+    try {
+      const response = await axiosInstance.put(
+        API_PATHS.TASKS.UPDATE_TODO_CHECKLIST(taskId),
+        { todoChecklist }
+      );
+      if (response.status === 200) {
+        setTask(response.data?.task || task);
+      } else {
+        // Optionally revert the toggle if the API call fails.
+        todoChecklist[index].completed = !todoChecklist[index].completed;
+      }
+    } catch (error) {
+      todoChecklist[index].completed = !todoChecklist[index].completed;
+    }
+  }
 };
 
 // Handle attachment link cLick
@@ -91,6 +92,8 @@ className={`text-[13px] md:text-[13px] font-medium ${getStatusTagColor(task?.sta
 >
 {task?.status}
 </div>
+</div>
+
 <div className="mt-4">
   <InfoBox label="Description" value={task?.description}/>
 </div>
@@ -102,8 +105,8 @@ className={`text-[13px] md:text-[13px] font-medium ${getStatusTagColor(task?.sta
   <div className='col-span-6 md:col-span-4'>
     <InfoBox label="Due Date"
     value={
-      task?.dieDate
-      ? SVGAnimateMotionElement(task?.dueDate).format("Do MM YYYY")
+      task?.dueDate
+      ? moment(task?.dueDate).format("Do MMM YYYY")
       : "N/A"
     }
     />
@@ -116,7 +119,7 @@ className={`text-[13px] md:text-[13px] font-medium ${getStatusTagColor(task?.sta
 
     <AvatarGroup
     avatars={
-      task?.assignedTo?.map((item)) => item?.profileImageUrl) ||
+      task?.assignedTo?.map((item) => item?.profileImageUrl) ||
       []
     }
     maxVisible={5}
@@ -129,8 +132,8 @@ className={`text-[13px] md:text-[13px] font-medium ${getStatusTagColor(task?.sta
       Todo Checklist
     </label>
 
-    {task?.TodoChecklist?.map((item, index) => (
-      <TodoChecklist 
+    {task?.todoChecklist?.map((item, index) => (
+      <TodoCheckList
       key={`todo_${index}`}
       text={item.text}
       isChecked={item?.completed}
@@ -166,7 +169,8 @@ onClick={() => handleLinkClick(link)}
 export default ViewTaskDetails; 
 
 const InfoBox =({label, value})=>{
-  return <>
+  return (
+  <>
   <label className='text-xs font-medium text-slate-500 '>{label}</label>
 
   <p className='text-[13px] md:text-[13px] font-medium text-gray-700 mt-0.5'>
@@ -176,8 +180,8 @@ const InfoBox =({label, value})=>{
   );
 };
 
-const TodoCheckList =({text, isChecked, onChange})=> {
-  return
+const TodoCheckList = ({text, isChecked, onChange}) => {
+  return (
   <div className='flex items-center gap-3'>
   <input
   type='checkbox'
@@ -188,6 +192,7 @@ const TodoCheckList =({text, isChecked, onChange})=> {
 
   <p className='text-[13px] text-gray-800'>{text}</p>
   </div>
+  );
 }
 
 const Attachment = ({ link, index, onClick }) => {
@@ -196,8 +201,8 @@ className="flex justify-between bg-gray-50 border border-gray-100 px-3 py-2 roun
 onClick={onClick}
 >
 <div className="flex-1 flex items-center gap-3 border border-gray-100">
-<span className="text-xs [text-gray-400 font-semibold mr-2">
-{index < 9 ? '0${index + 1}' : index + 1}
+<span className="text-xs text-gray-400 font-semibold mr-2">
+{index < 9 ? `0${index + 1}` : index + 1}
 </span>
 
 <p className="text-xs text-black">{link}</p>

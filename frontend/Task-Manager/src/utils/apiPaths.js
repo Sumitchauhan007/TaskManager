@@ -27,15 +27,16 @@ export const API_PATHS = {
         UPDATE_TASK: (taskId) => `/api/tasks/${taskId}`,//update task details
         DELETE_TASK: (taskId) => `/api/tasks/${taskId}`,//delete task(admin only)
         YPDATE_TASK_STATUS: (taskId) => `/api/tasks/${taskId}/status`,//update task 
+        UPDATE_TASK_STATUS: (taskId) => `/api/tasks/${taskId}/status`,//update task 
         UPDATE_TODO_CHECKLIST: (taskId) => `/api/tasks/${taskId}/todo`,//update todo 
     },
 
     REPORTS:{
-        EXPORT_TASKS: "/api/reports/exports/export/tasks", //download all tasks as ana excel sheet/file
-        EXPORT_USERS: "/api/reports/exports/export/users", //download user-task report
+        EXPORT_TASKS: "/api/reports/export/tasks", //download all tasks as an excel sheet/file
+        EXPORT_USERS: "/api/reports/export/users", //download user-task report
     },
 
     IMAGE: {
-        UPLOAD_IMAGE: "api/auth/upload-image",
+        UPLOAD_IMAGE: "/api/auth/upload-image",
     },
 };

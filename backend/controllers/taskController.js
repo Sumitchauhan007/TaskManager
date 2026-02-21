@@ -105,12 +105,12 @@ const createTask = async (req,res) => {
         description,
         priority,
         dueDate,
-        assignedto,
+        assignedTo,
         attachments,
         todoChecklist,
     } = req.body;
 
-    if(!Array.isArray(assignedto)) {
+    if(!Array.isArray(assignedTo)) {
         return res
         .status(400)
         .json({ message: "assignedTo must be an array of user IDs" });
@@ -120,7 +120,7 @@ const createTask = async (req,res) => {
         description,
         priority,
         dueDate,
-        assignedto,
+        assignedTo,
         createdBy: req.user._id,
         todoChecklist,
         attachments,
@@ -157,8 +157,8 @@ const updateTask = async (req, res) => {
             task.assignedTo = req.body.assignedTo;
         }
         
-        const updateTask = req.body.assignedTo;
-        res.json({message: "Task updated successfully" ,updateTask });
+        await task.save();
+        res.json({message: "Task updated successfully", task });
         }
           catch (error) {
             res.status(500).json({ message:"Server error", error: error.message});
@@ -272,7 +272,7 @@ const getDashboardData = async (req, res) => {
 
         //ensure all possible statuses are included
         const taskStatuses = ["Pending" , "In Progress","Completed"];
-        const taskDistributionRaw = await task.aggregate([
+        const taskDistributionRaw = await Task.aggregate([
         {
             $group:{
                 _id:"$status",
@@ -280,7 +280,7 @@ const getDashboardData = async (req, res) => {
             },
         },
         ]);
-    const tasDistribution = taskStatuses.reduce((acc,status) => {
+    const taskDistribution = taskStatuses.reduce((acc,status) => {
         const formattedKey = status.replace(/\s+/g, "");
         acc[formattedKey] = 
         taskDistributionRaw.find((item) =>item._id === status)?.count || 0;
@@ -309,7 +309,7 @@ const getDashboardData = async (req, res) => {
     const recentTasks = await Task.find()
     .sort({createdAt: -1})
     .limit(10)
-    .select("title status priority dueData createdAt");
+    .select("title status priority dueDate createdAt");
 
     res.status(200).json({
         statistics:{
@@ -319,7 +319,7 @@ const getDashboardData = async (req, res) => {
             completedTasks,
         },
         charts: {
-            tasDistribution,
+            tasksDistribution: taskDistribution,
             taskPriorityLevels,
         },
         recentTasks,
@@ -345,7 +345,7 @@ const getUserDashboardData = async (req, res) => {
        const overdueTasks = await Task.countDocuments ({
         assignedTo: userId,
         status: {$ne: "Completed"},
-        dueDate: {$lt: newdate()},
+        dueDate: {$lt: new Date()},
        });
 
        //taskDistribution by status

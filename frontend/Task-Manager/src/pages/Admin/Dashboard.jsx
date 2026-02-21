@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useUserAuth } from '../../hooks/useUserAuth'
 import { UserContext } from '../../context/UserContext';
 import DashboardLayout from '../../components/layouts/DashboardLayout';
-import { data, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import moment from 'moment';
@@ -74,7 +74,8 @@ const Dashboard = () => {
     return () => {};
   }, []);
 
-  return <DashboardLayout activeMenu="Dashboard">
+  return (
+  <DashboardLayout activeMenu="Dashboard">
     <div className='card my-5'>
       <div>
    <div className="col-span-3">
@@ -158,7 +159,8 @@ const Dashboard = () => {
       </div>
     </div>
  </div>
-</DashboardLayout>;
+</DashboardLayout>
+  );
 };
 
 export default Dashboard;

@@ -1,9 +1,10 @@
-import React from 'react'
-import DashboardLayout from '../../components/layouts/DashboardLayout'
+import React from 'react';
+import DashboardLayout from '../../components/layouts/DashboardLayout';
 import { API_PATHS } from '../../utils/apiPaths';
 import axiosInstance from '../../utils/axiosInstance';
-import { useEffect ,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LuFileSpreadsheet } from 'react-icons/lu';
+import toast from 'react-hot-toast';
 import UserCard from '../../components/Cards/UserCard';
 
 const ManageUsers = () => {
@@ -24,7 +25,7 @@ console.error("Error fetching users:", error);
 //downlaod task report
 const handleDownloadReport = async () => {
   try {
-    const resposne = await axiosInstance.get(API_PATHS.REPORTS.EXPORT_USERS, {
+    const response = await axiosInstance.get(API_PATHS.REPORTS.EXPORT_USERS, {
       responseType: "blob",
     });
 

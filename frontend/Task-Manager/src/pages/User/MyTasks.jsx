@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
-import DashboardLayout from '../../components/DashboardLayout'
-import { useState } from 'react';
-import { useEffect } from 'react';
-import {axiosInstance} from '../../utils/axiosInstance';
+import React, { useState, useEffect } from 'react';
+import DashboardLayout from '../../components/layouts/DashboardLayout';
+import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import { useNavigate } from 'react-router-dom';
-import {LuFileSpreadsheet} from;
+import { LuFileSpreadsheet } from 'react-icons/lu';
+import toast from 'react-hot-toast';
 import TaskStatusTabs from '../../components/TaskStatusTabs';
 import TaskCard from '../../components/Cards/TaskCard';
 
@@ -44,13 +43,16 @@ const getAllTasks = async () => {
 };
 
 const handleClick = (taskId) => {
-navigate(`/user/task-details/${taskId}`);
+  navigate(`/user/task-details/${taskId}`);
 };
 
-
-
-    //craete  url link for blob
-    const url = window.URL.createObjectURL(new Blob([respsonse.data]));
+const handleDownloadReport = async () => {
+  try {
+    const response = await axiosInstance.get(API_PATHS.REPORTS.EXPORT_TASKS, {
+      responseType: "blob",
+    });
+    // create url link for blob
+    const url = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement("a");
     link.href = url;
     link.setAttribute("download", "task_report.xlsx");

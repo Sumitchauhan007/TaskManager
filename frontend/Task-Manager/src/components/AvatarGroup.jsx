@@ -3,7 +3,7 @@ import React from 'react'
 const AvatarGroup = ({avatars,maxVisible = 3}) => {
   return (
     <div className='flex items-center'>
-        {avatars.slice(0,maxVisible).map({avatar, index} => (
+        {avatars.slice(0,maxVisible).map((avatar, index) => (
             <img 
             key={index}
             src={avatar}

@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Michroma&family=Outfit:wght@100..900&family=Teko:wght@300..700&family=Tektur:wght@400..900&display=swap');
 @import "tailwindcss";
 
-@tailwind utilities;
-
 
 @theme{
   --font-display: "Michroma", "sans-serif";
@@ -13,7 +11,7 @@
 
 @layer base{
   html {
-    font-family: var(--font--display);
+    font-family: var(--font-display);
 
   }
   body{
@@ -51,7 +49,7 @@
 } 
 
 .add-btn{
-  @apply w-full flex items-center justify-center gap=1.5 text-xs  md:text-sm font-medium text-primary whitespace-nowrap  bg-blue-50  border border-blue-100 rounded-lg px-4 py-2 cursor-pointer;
+  @apply w-full flex items-center justify-center gap-1.5 text-xs  md:text-sm font-medium text-primary whitespace-nowrap  bg-blue-50  border border-blue-100 rounded-lg px-4 py-2 cursor-pointer;
 }
 
 .download-btn {
@@ -59,5 +57,5 @@
 }
 
 .user-card {
-  @apply bg-white p-4 rounded-xl shadow-gray-100 border border-gray-200/50,
+  @apply bg-white p-4 rounded-xl shadow-gray-100 border border-gray-200/50;
 }

@@ -57,7 +57,7 @@ const SignUp = () => {
         email,
         password,
         profileImageUrl,
-        adminInviteTokens
+        adminInviteToken: adminInviteTokens
       });
 
       const { token, role } = response.data;
@@ -134,3 +134,4 @@ const SignUp = () => {
   )
 }
 
+export default SignUp;

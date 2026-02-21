@@ -1,38 +1,40 @@
-import React, { useActionState, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import DashboardLayout from '../../components/layouts/DashboardLayout';
-import  {PRIORITY_DATA} from "../../utils/data";
+import { PRIORITY_DATA } from "../../utils/data";
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import toast from "react-hot-toast";
-import {useLoaction, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { LuTrash2 } from 'react-icons/lu';
 import SelectDropdown from '../../components/Inputs/SelectDropdown';
 import SelectUsers from '../../components/Inputs/SelectUsers';
+import TodoListInput from '../../components/Inputs/TodoListInput';
 import AddAttachmentsInput from '../../components/Inputs/AddAttachmentsInput';
 import DeleteAlert from '../../components/DeleteAlert';
+import Modal from '../../components/Modal';
 const CreateTask = () => {
    
-  const location = useLoaction();
+  const location = useLocation();
   const {taskId} = location.state || {};
   const navigate = useNavigate();
 
-  const [taskData, setTaskData] = useState({ 
-    title:" ",
+  const [taskData, setTaskData] = useState({
+    title: "",
     description: "",
-    priority:"Low",
+    priority: "Low",
     dueDate: null,
-    assignmentTo: [],
+    assignedTo: [],
     todoChecklist: [],
-    attachements:[],
+    attachments: [],
   });
 
   const [currentTask, setCurrentTask] = useState(null);
 
-  const [error, setError] = useSatate("");
-  const [Loading,setLoding] = usestate(false);
+  const [error, setError] = useState("");
+  const [Loading, setLoading] = useState(false);
 
-  const [openDeleteAlert, setOpenDeleteAlert]  = useSatate(false);
+  const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
 
   const handleValueChange = (key,value) => {
     setTaskData((prevData) => ({ ...prevData, [key]: value}));
@@ -43,19 +45,19 @@ const CreateTask = () => {
     //reset form
     setTaskData({
       title: "",
-      priority:"",
-      description:"Low",
+      description: "",
+      priority: "Low",
       dueDate: null,
       assignedTo: [],
-      todoChecklist:[],
-      attachments:[],
+      todoChecklist: [],
+      attachments: [],
     });
   };
 
   //create Task
 
   const createTask = async () => {
-    setLoding(true);
+    setLoading(true);
 
     try{
 const todolist = taskData. todoChecklist ?. map((item) => ({
@@ -75,10 +77,9 @@ clearData();
     }
     catch(error){
       console.log("Error creating task:", error);
-      setLoading(false);
     }
     finally{
-      setLoding(false);
+      setLoading(false);
     }
   };
 
@@ -140,13 +141,10 @@ if (taskData.todoChecklist?.length === 0) {
   return;
 }
 
-if (taskId){
+if (taskId) {
   updateTask();
-  return;
-
+} else {
   createTask();
-}
-
 }
   };
  
@@ -172,7 +170,7 @@ setTaskData((prevState) => ({
 assignedTo: taskInfo?.assignedTo?.map((item) => item?._id) || [],
 todoChecklist:
 taskInfo?.todoChecklist?.map((item) => item?.text) || [],
-attachements: taskInfo?.attachements || [],
+attachments: taskInfo?.attachments || [],
   }));
 }
     } catch (error) {
