@@ -73,7 +73,7 @@ return () => {};
 }, [filterStatus]);
 
 return(
-<DashboardLayout activeMenu="Manage Tasks">
+<DashboardLayout activeMenu="My Tasks">
 <div className="my-5">
   <div className='flex flex-col lg:flex-row md:items-center justify-between'>
     <div className="flex items-center justify-between gap-3">
@@ -105,6 +105,12 @@ return(
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+        {allTasks.length === 0 && (
+          <div className="col-span-3 text-center py-16 text-gray-400">
+            <p className="text-lg font-medium">No tasks assigned yet</p>
+            <p className="text-sm mt-1">Tasks assigned to you will appear here.</p>
+          </div>
+        )}
         {allTasks?.map((item,index) => (
          <TaskCard
           key={item._id}

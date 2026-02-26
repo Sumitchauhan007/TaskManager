@@ -29,7 +29,7 @@ const UserDashboard = () => {
   //chart data preparation
 
   const prepareChartData = (data) => {
-    const tasksDistribution = data?.tasksDistribution || null;
+    const tasksDistribution = data?.taskDistribution || null;
     const taskPriorityLevels = data?.taskPriorityLevels || null;
 
     const tasksDistributionData = [
@@ -89,7 +89,7 @@ const UserDashboard = () => {
     <InfoCard
     label="Total Tasks"
     value={addThousandSeparators(
-      dashboardData?.charts?.tasksDistribution?.All || 0
+      dashboardData?.charts?.taskDistribution?.All || 0
     )}
     color="bg-primary"
    />
@@ -97,21 +97,21 @@ const UserDashboard = () => {
    <InfoCard
     label="Pending Tasks"
     value={addThousandSeparators(
-      dashboardData?.charts?.tasksDistribution?.Pending || 0
+      dashboardData?.charts?.taskDistribution?.Pending || 0
     )}
     color="bg-violet-500"
    />
    <InfoCard
     label="In Progress Tasks"
     value={addThousandSeparators(
-      dashboardData?.charts?.tasksDistribution?.InProgress || 0
+      dashboardData?.charts?.taskDistribution?.InProgress || 0
     )}
     color="bg-cyan-500"
    />
    <InfoCard
     label="Completed Tasks"
     value={addThousandSeparators(
-      dashboardData?.charts?.tasksDistribution?.Completed || 0
+      dashboardData?.charts?.taskDistribution?.Completed || 0
     )}
     color="bg-lime-500"
    />
