@@ -34,7 +34,6 @@ const Navbar = ({ activeMenu }) => {
 
         <div className="flex items-center gap-2.5">
           <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-lg object-cover" style={{ boxShadow: "0 4px 14px rgba(82,0,255,0.50)" }} />
-          </div>
           <h2 className="text-sm font-semibold text-white/90 tracking-wide">Task Manager</h2>
         </div>
 
