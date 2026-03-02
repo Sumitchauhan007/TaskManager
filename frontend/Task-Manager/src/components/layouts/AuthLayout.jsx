@@ -12,9 +12,7 @@ const AuthLayout = ({ children }) => {
                 {/* Form side */}
                 <div className="flex flex-col px-10 py-12">
                     <div className="flex items-center gap-2 mb-10">
-                        <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #5200FF, #F900FF)" }}>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-                        </div>
+                        <img src="/logo.png" alt="Logo" className="w-9 h-9 rounded-xl object-cover" style={{ boxShadow: "0 4px 14px rgba(82,0,255,0.50)" }} />
                         <h2 className="text-base font-semibold tracking-wide" style={{ color: "var(--text-1)" }}>Task Manager</h2>
                     </div>
                     {children}

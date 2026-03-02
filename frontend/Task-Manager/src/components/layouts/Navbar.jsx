@@ -33,11 +33,7 @@ const Navbar = ({ activeMenu }) => {
         </button>
 
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #5200FF, #F900FF)", boxShadow: "0 4px 14px rgba(82,0,255,0.50)" }}>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 11l3 3L22 4"/>
-              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-            </svg>
+          <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-lg object-cover" style={{ boxShadow: "0 4px 14px rgba(82,0,255,0.50)" }} />
           </div>
           <h2 className="text-sm font-semibold text-white/90 tracking-wide">Task Manager</h2>
         </div>
