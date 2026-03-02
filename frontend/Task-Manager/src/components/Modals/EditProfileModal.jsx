@@ -77,13 +77,14 @@ const EditProfileModal = ({ isOpen, onClose, user, onUpdateSuccess }) => {
                     type="text"
                 />
 
-                {error && <p className="text-red-500 text-xs">{error}</p>}
+                {error && <p className="text-red-400 text-xs bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">{error}</p>}
 
                 <div className="flex justify-end gap-3 mt-4">
-                    <button type="button" onClick={onClose} className="px-5 py-2 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md transition-all" disabled={isLoading}>
+                    <button type="button" onClick={onClose} className="px-5 py-2 text-sm font-semibold text-white/60 bg-white/8 hover:bg-white/12 rounded-xl transition-all border border-white/10" disabled={isLoading}
+                      style={{ background: 'rgba(255,255,255,0.07)' }}>
                         Cancel
                     </button>
-                    <button type="submit" className="px-5 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-dark rounded-md transition-all" disabled={isLoading}>
+                    <button type="submit" className="btn-primary !w-auto px-6 py-2" disabled={isLoading}>
                         {isLoading ? "Updating..." : "Update Profile"}
                     </button>
                 </div>

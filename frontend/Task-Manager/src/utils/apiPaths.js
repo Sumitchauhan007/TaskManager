@@ -35,7 +35,17 @@ export const API_PATHS = {
         EXPORT_USERS: "/api/reports/export/users", //download user-task report
     },
 
+    PERSONAL_TASKS: {
+        GET_ALL:          "/api/personal-tasks",
+        GET_BY_ID:    (id) => `/api/personal-tasks/${id}`,
+        CREATE:           "/api/personal-tasks",
+        UPDATE:       (id) => `/api/personal-tasks/${id}`,
+        DELETE:       (id) => `/api/personal-tasks/${id}`,
+        UPDATE_TODO:  (id) => `/api/personal-tasks/${id}/todo`,
+    },
+
     IMAGE: {
         UPLOAD_IMAGE: "/api/auth/upload-image",
+        UPLOAD_ATTACHMENT: "/api/auth/upload-attachment",
     },
 };

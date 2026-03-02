@@ -1,13 +1,19 @@
 import React from 'react'
 
-const CustomTooltip = ({active,payload}) => {
+const CustomTooltip = ({active, payload}) => {
   if (active && payload && payload.length) {
     return (
-      <div className='bg-white shadow-md rounded-lg p-2 border border-gray-300'>
-        <p className='text-xs font-semibold text-purple-800 mb-1'>{payload[0].name}</p>
-        <p className='text-sm text-gray-600'>
-            Count: <span className='text-sm font-medium text-gray-900'>{payload[0].value}</span>
-        </p>
+      <div
+        style={{
+          background: 'var(--drop-bg)',
+          backdropFilter: 'blur(16px)',
+          border: '1px solid var(--border-str)',
+          borderRadius: '10px',
+          padding: '8px 14px',
+        }}
+      >
+        <p style={{ fontSize: 11, fontWeight: 600, color: '#5200FF', marginBottom: 4 }}>{payload[0].name}</p>
+        <p style={{ fontSize: 13, color: 'var(--text-2)' }}>Count: <span style={{ fontWeight: 700, color: 'var(--text-1)' }}>{payload[0].value}</span></p>
       </div>
     );
   };

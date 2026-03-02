@@ -18,9 +18,12 @@ import MyTasks from './pages/User/MyTasks';
 import ViewTaskDetails from './pages/User/ViewTaskDetails';
 import PrivateRoute from './routes/PrivateRoute';
 import UserProvider, { UserContext } from './context/UserContext';
+import ThemeProvider from './context/ThemeContext';
+import PersonalTasks from './pages/User/PersonalTasks';
 
 const App = () => {
   return (
+    <ThemeProvider>
     <UserProvider>
       <Router>
         <Routes>
@@ -28,7 +31,14 @@ const App = () => {
           <Route path="/auth/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/unauthorized" element={<div>Unauthorized Access</div>} />
+          <Route path="/unauthorized" element={
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="card text-center p-10">
+                <h2 className="text-xl font-bold text-white/80">Unauthorized Access</h2>
+                <p className="text-sm text-white/40 mt-2">You don't have permission to view this page.</p>
+              </div>
+            </div>
+          } />
 
           {/* Default redirect handler */}
           <Route path="/" element={<Root />} />
@@ -47,6 +57,11 @@ const App = () => {
             <Route path="/user/tasks" element={<MyTasks />} />
             <Route path="/user/task-details/:id" element={<ViewTaskDetails />} />
           </Route>
+
+          {/* Shared routes (admin + member) */}
+          <Route element={<PrivateRoute allowedRoles={["admin", "member"]} />}>
+            <Route path="/personal-tasks" element={<PersonalTasks />} />
+          </Route>
         </Routes>
       </Router>
 
@@ -55,10 +70,17 @@ const App = () => {
           className: "",
           style: {
             fontSize: "13px",
+            background: "var(--modal-bg)",
+            color: "var(--text-1)",
+            border: "1px solid var(--border-str)",
+            backdropFilter: "blur(20px)",
+            borderRadius: "12px",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
           },
         }}
       />
     </UserProvider>
+    </ThemeProvider>
   );
 };
 

@@ -8,11 +8,18 @@ const AvatarGroup = ({avatars,maxVisible = 3}) => {
             key={index}
             src={avatar}
              alt={`Avatar ${index}`}
-             className='w-9 h-9 rounded-full border-2 border-white -ml-3 first:ml-0'
+             className='w-9 h-9 rounded-xl border-2 -ml-3 first:ml-0 object-cover'
+             style={{ borderColor: 'rgba(255,255,255,0.2)' }}
              />
         ))}
         {avatars.length > maxVisible && (
-            <div className='w-9 h-9 flex items-center justify-center bg-blue-50 text-sm font-medium rounded-full border-2 border-white -ml-3'>
+            <div
+              className='w-9 h-9 flex items-center justify-center text-xs font-bold text-white rounded-xl -ml-3'
+              style={{
+                background: 'rgba(0,122,255,0.3)',
+                border: '2px solid rgba(255,255,255,0.2)',
+              }}
+            >
                 +{avatars.length - maxVisible}
             </div> 
         )}

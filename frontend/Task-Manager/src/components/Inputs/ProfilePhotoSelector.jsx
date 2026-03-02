@@ -43,14 +43,17 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
         />
 
         {!image ? (
-            <div className="w-20 h-20 flex item-center justify-center bg-blue-100/50 rounded-full relative cursor-pointer">
-                <LuUser className="text-4xl text-primary" />
+            <div
+              className="w-20 h-20 flex items-center justify-center rounded-2xl relative cursor-pointer"
+              style={{ background: 'rgba(0,122,255,0.15)', border: '2px dashed rgba(0,122,255,0.3)' }}
+            >
+                <LuUser className="text-4xl text-blue-400" />
 
                 <button type="button"
-                    className="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-fully absolute -bottom-1 -right-1 cursor-pointer"
+                    className="w-8 h-8 flex items-center justify-center text-white rounded-xl absolute -bottom-1 -right-1 cursor-pointer"
+                    style={{ background: 'linear-gradient(135deg, #007AFF, #0056CC)', boxShadow: '0 4px 12px rgba(0,122,255,0.4)' }}
                     onClick={onChooseFile}>
-
-                    <LuUpload />
+                    <LuUpload className="text-sm" />
                 </button>
             </div>
         ) : (
@@ -58,13 +61,15 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
                 <img
                     src={previewUrl}
                     alt="profile photo"
-                    className="w-20 h-20 rounded-full object-cover"
+                    className="w-20 h-20 rounded-2xl object-cover border-2"
+                    style={{ borderColor: 'rgba(255,255,255,0.2)' }}
                 />
                 <button type="button"
-                    className="w-8 h-8 flex items-center justify-center bg-red-500 text-white rounded-full absolute -bottom-1 right-1"
+                    className="w-8 h-8 flex items-center justify-center text-white rounded-xl absolute -bottom-1 right-1"
+                    style={{ background: 'linear-gradient(135deg, #FF3B30, #cc2020)', boxShadow: '0 4px 12px rgba(255,59,48,0.4)' }}
                     onClick={handleRemoveImage}
                 >
-                    <LuTrash />
+                    <LuTrash className="text-sm" />
                 </button>
             </div>
         )}

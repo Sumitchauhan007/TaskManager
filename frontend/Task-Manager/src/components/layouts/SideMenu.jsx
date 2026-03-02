@@ -32,47 +32,95 @@ const SideMenu = ({ activeMenu, onMenuClick }) => {
   }, [user]);
 
   return (
-    <div className="w-64 h-[calc(100vh-61px)] bg-white flex flex-col overflow-y-auto border-r border-gray-100">
-      <div className="flex flex-col items-start px-5 pt-5 pb-3 border-b border-gray-100">
+    <div
+      className="w-64 h-[calc(100vh-64px)] flex flex-col overflow-y-auto"
+      style={{
+        background: "var(--sidebar-bg)",
+        backdropFilter: "blur(28px) saturate(2)",
+        WebkitBackdropFilter: "blur(28px) saturate(2)",
+        borderRight: "1px solid var(--border-str)",
+        transition: "background 0.3s ease",
+      }}
+    >
+      {/* User profile section */}
+      <div
+        className="flex items-center gap-3 px-4 pt-4 pb-4 mx-3 mt-3 rounded-2xl"
+        style={{
+          background: "var(--surface-2)",
+          border: "1px solid var(--border-str)",
+        }}
+      >
+        {/* Avatar */}
         {user?.profileImageUrl ? (
           <img
             src={user.profileImageUrl}
             alt="Profile"
-            className="w-16 h-16 rounded-full object-cover bg-slate-200"
+            className="w-12 h-12 rounded-2xl object-cover border-2 border-white/20 flex-shrink-0"
           />
         ) : (
-          <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary text-2xl font-semibold">
+          <div
+            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white text-lg font-bold flex-shrink-0"
+            style={{
+              background: "linear-gradient(135deg, #5200FF, #F900FF)",
+              boxShadow: "0 4px 16px rgba(82,0,255,0.50)",
+            }}
+          >
             {user?.name?.[0]?.toUpperCase()}
           </div>
         )}
 
-        {user?.role === 'admin' && (
-          <div className="text-[10px] font-medium text-white bg-primary px-3 py-0.5 rounded mt-2">
-            Admin
+        {/* Text info */}
+        <div className="min-w-0">
+          {/* Name + role badge on same line */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <h5 className="text-sm font-semibold leading-tight truncate" style={{ color: "var(--text-1)" }}>
+              {user?.name || ""}
+            </h5>
+            <span
+              className="text-[9px] font-bold tracking-widest px-1.5 py-0.5 rounded-full uppercase flex-shrink-0"
+              style={user?.role === 'admin'
+                ? { background: "linear-gradient(135deg, #5200FF, #F900FF)", color: "#fff" }
+                : { background: "rgba(82,0,255,0.18)", color: "#5200FF", border: "1px solid rgba(82,0,255,0.35)" }}
+            >
+              {user?.role === 'admin' ? 'Admin' : 'Member'}
+            </span>
           </div>
-        )}
-
-        <h5 className="text-gray-900 font-medium mt-2 leading-5">
-          {user?.name || ""}
-        </h5>
-        <p className="text-[12px] text-gray-500">{user?.email || ""}</p>
+          {/* Email below */}
+          <p className="text-[11px] mt-0.5 truncate" style={{ color: "var(--text-3)" }}>
+            {user?.email || ""}
+          </p>
+        </div>
       </div>
 
-      <nav className="flex-1 px-2 py-3">
+      <nav className="flex-1 px-3 py-4 space-y-1">
         {SideMenuData.map((item, index) => (
           <button
             key={`menu_${index}`}
-            className={`w-full flex items-center gap-3 text-[14px] rounded-lg py-2.5 px-4 mb-1 cursor-pointer transition-colors ${activeMenu === item.label
-              ? "text-primary bg-blue-50 border-r-4 border-primary font-medium"
-              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-              }`}
+            className={`w-full flex items-center gap-3 text-[13px] rounded-xl py-2.5 px-4 cursor-pointer transition-all duration-200`}
+            style={activeMenu === item.label ? {
+              background: "rgba(82,0,255,0.22)",
+              border: "1px solid rgba(82,0,255,0.45)",
+              boxShadow: "0 4px 16px rgba(82,0,255,0.20)",
+              color: "var(--text-1)",
+              fontWeight: 600,
+            } : {
+              background: "transparent",
+              border: "1px solid transparent",
+              color: "var(--text-3)",
+            }}
             onClick={() => handleClick(item.path)}
           >
-            <item.icon className="text-xl flex-shrink-0" />
+            <item.icon
+              className="text-lg flex-shrink-0"
+              style={{ color: activeMenu === item.label ? "#5200FF" : "var(--text-3)" }}
+            />
             {item.label}
           </button>
         ))}
       </nav>
+
+      {/* Bottom gradient line */}
+      <div className="h-px mx-3 mb-0" style={{ background: "linear-gradient(90deg, transparent, var(--border-str), transparent)" }} />
     </div>
   );
 };

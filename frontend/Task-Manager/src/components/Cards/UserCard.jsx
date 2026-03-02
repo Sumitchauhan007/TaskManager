@@ -5,30 +5,39 @@ const UserCard = ({userInfo}) => {
     <div className='user-card pt-2'>
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-                <img 
-                src={userInfo?.profileImageUrl}
-                 alt={`Avatar`}
-                 className='w-12 h-12 rounded-full border-2 border-white' />
+                {userInfo?.profileImageUrl ? (
+                  <img
+                    src={userInfo.profileImageUrl}
+                    alt={`Avatar`}
+                    className='w-12 h-12 rounded-2xl border border-white/20 object-cover' />
+                ) : (
+                  <div
+                    className='w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-lg'
+                    style={{ background: 'linear-gradient(135deg, #5200FF, #F900FF)' }}
+                  >
+                    {userInfo?.name?.[0]?.toUpperCase()}
+                  </div>
+                )}
 
-                 <div>
-                    <p className="">{userInfo?.name}</p>
-                    <p className="text-sm text-gray-500">{userInfo?.email}</p>
-                 </div>
+                <div>
+                    <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>{userInfo?.name}</p>
+                    <p className="text-[11px] mt-0.5" style={{ color: 'var(--text-3)' }}>{userInfo?.email}</p>
+                </div>
             </div>
         </div>
 
-        <div className="flex items-end gap-3 mt-5 ">
-            <StatCard 
+        <div className="flex items-end gap-2 mt-4">
+            <StatCard
             label="Pending"
             count={userInfo?.pendingTasks || 0}
             status="Pending"
             />
-            <StatCard 
+            <StatCard
             label="In Progress"
             count={userInfo?.inProgressTasks || 0}
             status="In Progress"
             />
-            <StatCard 
+            <StatCard
             label="Completed"
             count={userInfo?.completedTasks || 0}
             status="Completed"
@@ -37,29 +46,25 @@ const UserCard = ({userInfo}) => {
     </div>
   )
 }
- 
+
 export default UserCard;
 
 const StatCard = ({ label, count, status }) => {
+  const getStatusStyle = () => {
+    switch (status) {
+      case 'In Progress': return { background: 'rgba(204,255,0,0.10)', border: '1px solid rgba(204,255,0,0.22)', color: '#CCFF00' };
+      case 'Completed': return { background: 'rgba(82,0,255,0.14)', border: '1px solid rgba(82,0,255,0.28)', color: '#a78bfa' };
+      default: return { background: 'rgba(255,107,0,0.12)', border: '1px solid rgba(255,107,0,0.24)', color: '#FF6B00' };
+    }
+  };
 
-const getStatusTagColor = () => {
-switch (status) {
-case "In Progress":
-return "text-cyan-500 bg-gray-50";
-
-case "Completed":
-return "text-indigo-500 bg-gray-50";
-
-default:
-return "text-violet-500 bg-gray-50";
-
-}
-};
-
-return (
-<div
- className={`flex-1 text-[10px] font-medium ${getStatusTagColor()} px-4 py-0.5 rounded`}>  
- <span className='text-[12px] font-semibold'>{count}</span><br  />
- </div>
-);
+  return (
+    <div
+      className='flex-1 rounded-xl px-3 py-2 text-center'
+      style={getStatusStyle()}
+    >
+      <span className='text-sm font-bold block'>{count}</span>
+      <span className='text-[9px] font-medium opacity-70 uppercase tracking-wider'>{label}</span>
+    </div>
+  );
 };

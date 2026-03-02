@@ -9,14 +9,14 @@ const Input = ({ value, onChange, label, placeholder, type }) => {
     };
     return (
         <div>
-            <label className='text-[13px] text-slate-800'>{label}</label>
+            <label style={{ fontSize: 12, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-2)' }}>{label}</label>
             <div className='input-box'>
                 <input
                     type={
                         type == 'password' ? (showPassword ? 'text' : 'password') : type
                     }
                     placeholder={placeholder}
-                    className="w-full bg-transparent outline-none"
+                    className="w-full bg-transparent outline-none text-white/90 placeholder:text-white/30"
                     value={value}
                     onChange={(e) => onChange(e)}
                 />
@@ -25,18 +25,16 @@ const Input = ({ value, onChange, label, placeholder, type }) => {
                     <>
                         {showPassword ? (
                             <FaRegEye
-                                size={22}
-                                className="text-primary cursor-pointer"
+                                size={18}
+                                className="text-blue-400 cursor-pointer flex-shrink-0"
                                 onClick={() => toggleShowPassword()}
                             />
                         ) : (
                             <FaRegEyeSlash
-                                size={22}
-                                className="text-slate-400 cursor-pointer"
+                                size={18}
+                                className="text-white/30 cursor-pointer flex-shrink-0"
                                 onClick={() => toggleShowPassword()}
                             />
-
-
                         )}
                     </>
                 )}

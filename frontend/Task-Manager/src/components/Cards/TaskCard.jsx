@@ -22,96 +22,111 @@ const TaskCard = ({
     const getstatusTagColor = () => {
         switch (status) {
             case "In Progress":
-                return "text-cyan-500 bg-cyan-50 border border-cyan-500/10";
+                return "text-[#CCFF00] bg-[#CCFF00]/10 border border-[#CCFF00]/25";
 
             case "Completed":
-                return "text-lime-500 bg-lime-50 border border-lime-500/20";
+                return "text-[#CCFF00] bg-[#CCFF00]/15 border border-[#CCFF00]/30";
 
             default:
-                return "text-violet-500 bg-violet-50 border border-violet-500/10";
+                return "text-[#FF6B00] bg-[#FF6B00]/10 border border-[#FF6B00]/25";
         }
     };
 
     const getPriorityTagColor = () => {
         switch (priority) {
             case "Low":
-                return "text-emerald-500 bg-emerald-50 border border-emerald-500/10";
+                return "text-[#CCFF00] bg-[#CCFF00]/10 border border-[#CCFF00]/20";
 
             case "Medium":
-                return "text-amber-500 bg-amber-50 border border-amber-500/10";
+                return "text-[#FF6B00] bg-[#FF6B00]/10 border border-[#FF6B00]/20";
 
             default:
-                return "text-rose-500 bg-rose-50 border border-rose-500/10";
+                return "text-[#F900FF] bg-[#F900FF]/10 border border-[#F900FF]/20";
         }
     };
 
-    return <div className='bg-white rounded-xl py-4 shadow-md shadow-gray-100 border border-gray-200/50 cursor-pointer'
-        onClick={onClick}>
-
-        <div className='flex items-end gap-3 px-4'>
-            <div className={`text-[11px] font-medium ${getstatusTagColor()} px-4 py-0.5 rounded`}>
-                {status}
-            </div>
-            <div className={`text-[11px] font-medium ${getPriorityTagColor()} px-4 py-0.5 rounded`}>
-                {priority} Priority
-            </div>
-        </div>
-
+    return (
         <div
-            className={`px-4 border-l-3px] ${status === "In Progress"
-                    ? "border-cyan-500"
-                    : status === "Completed"
-                        ? "border-indigo-500"
-                        : "border-violet-500"
-                }`}
+            className="rounded-2xl py-4 cursor-pointer transition-all duration-300 hover:-translate-y-1"
+            style={{
+                background: "var(--surface)",
+                backdropFilter: "blur(20px) saturate(1.8)",
+                WebkitBackdropFilter: "blur(20px) saturate(1.8)",
+                border: "1px solid var(--border)",
+                boxShadow: "var(--card-shadow)",
+                transition: "background 0.3s ease, border-color 0.3s ease, transform 0.2s ease",
+            }}
+            onClick={onClick}
         >
-            <p className='text-sm font-medium text-gray-800 mt-4 line-clamp-2'>
-                {title}
-            </p>
-
-            <p className='text-xs text-gray-500 mt-1.5 line-clamp-2 leading-[18px]'>
-                {description}
-            </p>
-
-            <p className='text-[13px] text-gray-700/80 font-medium mt-2 mb-2 leading-[18px]'>
-                Task DOne:{" "}
-                <span className='font-semibold text-gray-700'>
-                    {completedTodoCount} / {todoChecklist.length || 0}
-                </span>
-            </p>
-
-            <Progress progress={progress} status={status} />
-        </div>
-
-        <div className="px-4">
-            <div className="flex items-center justify-between my-1">
-                <div>
-                    <label className='text-xs text-gray-500'>Start Date</label>
-                    <p className='text-[13px] font-medium text-gray-900'>
-                        {moment(createdAt).format("Do MMM YYYY")}
-                    </p>
+            <div className='flex items-end gap-2 px-4'>
+                <div className={`badge ${getstatusTagColor()}`}>
+                    {status}
                 </div>
-
-                <div>
-                    <label className='text-xs text-gray-500'>Due Date</label>
-                    <p className='text-[13px] font-medium text-gray-900'>
-                        {moment(dueDate).format("Do MMM YYYY")}
-                    </p>
+                <div className={`badge ${getPriorityTagColor()}`}>
+                    {priority} Priority
                 </div>
             </div>
 
-            <div className='flex items-center justify-between mt-3'>
+            <div
+                className={`px-4 mt-1 border-l-2 ml-4 ${
+                    status === "In Progress"
+                        ? "border-[#CCFF00]"
+                        : status === "Completed"
+                            ? "border-[#5200FF]"
+                            : "border-[#FF6B00]"
+                }`}
+            >
+                <p className='text-sm font-semibold text-white/90 mt-3 line-clamp-2'>
+                    {title}
+                </p>
+
+                <p className='text-xs text-white/45 mt-1.5 line-clamp-2 leading-[18px]'>
+                    {description}
+                </p>
+
+                <p className='text-[12px] text-white/60 font-medium mt-2 mb-2 leading-[18px]'>
+                    Tasks Done:{" "}
+                    <span className='font-bold text-white/80'>
+                        {completedTodoCount} / {todoChecklist.length || 0}
+                    </span>
+                </p>
+
+                <Progress progress={progress} status={status} />
+            </div>
+
+            <div className="px-4">
+                <div className="flex items-center justify-between my-3">
+                    <div>
+                        <label className='text-[10px] text-white/35 uppercase tracking-wider'>Start Date</label>
+                        <p className='text-[12px] font-medium text-white/70 mt-0.5'>
+                            {moment(createdAt).format("Do MMM YYYY")}
+                        </p>
+                    </div>
+
+                    <div>
+                        <label className='text-[10px] text-white/35 uppercase tracking-wider'>Due Date</label>
+                        <p className='text-[12px] font-medium text-white/70 mt-0.5'>
+                            {moment(dueDate).format("Do MMM YYYY")}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div className='flex items-center justify-between mt-3 px-4'>
                 <AvatarGroup avatars={assignedTo || []} />
 
                 {attachmentCount > 0 && (
-                    <div className='flex items-center gap-2 bg-blue-50 px-2.5 py-1.5 rounded-lg'>
-                        <LuPaperclip className="text-primary" />{" "}
-                        <span className='text-xs text-gray-900'>{attachmentCount}</span>
+                    <div
+                      className='flex items-center gap-2 px-2.5 py-1.5 rounded-lg'
+                      style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}
+                    >
+                        <LuPaperclip className="text-[#F900FF] text-xs" />{" "}
+                        <span className='text-xs text-white/70'>{attachmentCount}</span>
                     </div>
                 )}
             </div>
         </div>
-    </div>;
+    );
 };
 
 export default TaskCard;

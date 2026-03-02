@@ -50,7 +50,13 @@ const SelectDropdown = ({
         type="button"
         onClick={toggleOpen}
         disabled={disabled}
-        className={`w-full text-sm text-black outline-none bg-white border border-slate-200 px-2.5 py-2 rounded-md mt-2 flex justify-between items-center transition focus:ring-2 focus:ring-indigo-300 disabled:opacity-50 disabled:cursor-not-allowed`}
+        className={`w-full text-sm outline-none px-3 py-2 rounded-xl mt-2 flex justify-between items-center transition disabled:opacity-50 disabled:cursor-not-allowed`}
+        style={{
+          color: 'var(--text-1)',
+          background: 'var(--input-bg)',
+          border: '1px solid var(--input-border)',
+          transition: 'background 0.3s ease',
+        }}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
@@ -59,7 +65,13 @@ const SelectDropdown = ({
       </button>
       {isOpen && (
         <ul
-          className="absolute w-full max-h-56 overflow-auto bg-white border border-slate-200 rounded-md shadow-lg z-20 mt-1"
+          className="absolute w-full max-h-56 overflow-auto rounded-xl shadow-2xl z-20 mt-1"
+          style={{
+            background: 'var(--drop-bg)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: '1px solid var(--border-str)',
+          }}
           role="listbox"
         >
           {options.map((option) => (
@@ -68,14 +80,16 @@ const SelectDropdown = ({
               role="option"
               aria-selected={option.value === value}
               onClick={() => handleSelect(option.value)}
-              className={`px-3 py-2 text-sm cursor-pointer hover:bg-indigo-50 ${option.value === value ? 'bg-indigo-100 font-medium' : ''
-                }`}
+              className="px-3 py-2.5 text-sm cursor-pointer transition-colors"
+              style={option.value === value
+                ? { background: 'rgba(82,0,255,0.22)', color: 'var(--text-1)', fontWeight: 600 }
+                : { background: 'transparent', color: 'var(--text-2)' }}
             >
               {option.label}
             </li>
           ))}
           {options.length === 0 && (
-            <li className="px-3 py-2 text-sm text-slate-500" aria-disabled>
+            <li className="px-3 py-2 text-sm text-white/35" aria-disabled>
               No options
             </li>
           )}

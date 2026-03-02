@@ -40,4 +40,14 @@ router.post("/upload-image", upload.single("image"), (req, res) => {
   res.status(200).json({ imageUrl });
 });
 
+// General file / attachment upload route (any file type, protected)
+router.post("/upload-attachment", protect, upload.single("file"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No file uploaded" });
+  }
+
+  const fileUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+  res.status(200).json({ fileUrl, fileName: req.file.originalname });
+});
+
 module.exports = router;

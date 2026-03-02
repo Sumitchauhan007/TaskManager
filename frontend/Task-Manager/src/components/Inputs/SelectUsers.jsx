@@ -70,36 +70,40 @@ const SelectUsers = ({
       >
         <div className="space-y-4 h-[60vh] overflow-y-auto">
           {allUsers.length === 0 ? (
-            <p className="text-sm text-gray-400 text-center py-8">
+            <p className="text-sm text-white/40 text-center py-8">
               No members found. Sign up a member account first.
             </p>
           ) : (
             allUsers.map((user) => (
               <div
                 key={user._id}
-                className='flex items-center gap-4 p-3 border-b border-gray-200'>
+                className='flex items-center gap-4 p-3'
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                 <img
                   src={user.profileImageUrl || ""}
                   alt={user.name}
-                  className='w-10 h-10 rounded-full bg-gray-200 object-cover'
+                  className='w-10 h-10 rounded-xl bg-white/10 object-cover'
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />
                 {!user.profileImageUrl && (
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-semibold text-sm flex-shrink-0 -ml-14">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-semibold text-sm flex-shrink-0 -ml-14"
+                    style={{ background: 'linear-gradient(135deg, #007AFF, #AF52DE)' }}
+                  >
                     {user.name?.[0]?.toUpperCase()}
                   </div>
                 )}
                 <div className='flex-1'>
-                  <p className='font-medium text-gray-800'>
+                  <p className='font-semibold text-white/85 text-sm'>
                     {user.name}
                   </p>
-                  <p className='text-sm text-gray-500'>{user.email}</p>
+                  <p className='text-xs text-white/40 mt-0.5'>{user.email}</p>
                 </div>
                 <input
                   type="checkbox"
                   checked={tempSelectedUsers.includes(user._id)}
                   onChange={() => toggleUserSelection(user._id)}
-                  className='w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm outline-none'
+                  className='w-4 h-4 accent-blue-500 bg-white/10 border-white/20 rounded outline-none'
                 />
               </div>
             ))

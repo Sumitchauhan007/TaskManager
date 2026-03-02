@@ -207,13 +207,13 @@ const CreateTask = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 mt-4">
           <div className="form-card col-span-3">
             <div className="flex items-center justify-between">
-              <h2 className='text-xl md:text-xl font-medium'>
+              <h2 className='text-xl md:text-xl font-bold text-white/90'>
                 {taskId ? "Update Task" : "Create New Task"}
               </h2>
 
               {taskId && (
                 <button
-                  className='flex items-center gap-1.5 text-[13px] font-medium text-rose-500 bg-rose-50 rounded px-2 py-1 border border-rose-100 hover:border-rose-300 cursor-pointer'
+                  className='flex items-center gap-1.5 text-[13px] font-medium text-rose-300 bg-rose-500/15 rounded-xl px-3 py-1.5 border border-rose-500/25 hover:bg-rose-500/25 cursor-pointer transition-all'
                   onClick={() => setOpenDeleteAlert(true)}
                 >
                   <LuTrash2 className='text-base' /> Delete
@@ -222,7 +222,7 @@ const CreateTask = () => {
             </div>
 
             <div className='mt-4'>
-              <label className='text-xs font-medium text-slate-600'>
+              <label className='text-[11px] font-semibold text-white/50 uppercase tracking-wider'>
                 Task Title
               </label>
 
@@ -236,7 +236,7 @@ const CreateTask = () => {
               />
             </div>
             <div className="mt-3">
-              <label className='text-xs font-medium text-slate-600'>
+              <label className='text-[11px] font-semibold text-white/50 uppercase tracking-wider'>
                 Description
               </label>
 
@@ -253,7 +253,7 @@ const CreateTask = () => {
 
             <div className="grid grid-cols-12 gap-4 mt-2">
               <div className="col-span-6 md:col-span-4">
-                <label className="text-xs font-medium text-slate-600">Priority</label>
+                <label className="text-[11px] font-semibold text-white/50 uppercase tracking-wider">Priority</label>
 
                 <SelectDropdown
                   options={PRIORITY_DATA}
@@ -264,7 +264,7 @@ const CreateTask = () => {
               </div>
 
               <div className="col-span-6 md:col-span-4">
-                <label className="text-xs font-medium text-slate-600">
+                <label className="text-[11px] font-semibold text-white/50 uppercase tracking-wider">
                   Due Date
                 </label>
 
@@ -280,7 +280,7 @@ const CreateTask = () => {
               </div>
 
               <div className="col-span-12 md:col-span-3">
-                <label className="text-xs font-medium text-slate-600">
+                <label className="text-[11px] font-semibold text-white/50 uppercase tracking-wider">
                   Assign To
                 </label>
                 <SelectUsers
@@ -294,7 +294,7 @@ const CreateTask = () => {
             </div>
 
             <div className="mt-3">
-              <label className='text-xs font-medium text-slate-600'>
+              <label className='text-[11px] font-semibold text-white/50 uppercase tracking-wider'>
                 TODO Checklist
               </label>
 
@@ -307,7 +307,7 @@ const CreateTask = () => {
             </div>
 
             <div className="mt-3">
-              <label className="text-xs font-medium text-slate-600" >
+              <label className="text-[11px] font-semibold text-white/50 uppercase tracking-wider" >
                 Add Attachments
               </label>
 
@@ -320,14 +320,14 @@ const CreateTask = () => {
             </div>
 
             {error && (
-              <p className="text-xs text-medium text-red-500 mt-5">
+              <p className="text-xs font-medium text-red-400 mt-5 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
                 {error}
               </p>
             )}
 
             <div className='flex justify-end mt-7'>
               <button
-                className='add-btn'
+                className='btn-primary !w-auto px-8'
                 onClick={handleSubmit}
                 disabled={Loading}
               >

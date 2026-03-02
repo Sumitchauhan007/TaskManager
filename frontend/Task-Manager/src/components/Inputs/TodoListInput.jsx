@@ -23,10 +23,14 @@ const TodoListInput = ({todoList,setTodoList}) => {
       {todoList.map((item, index) => (
         <div
      key={item}
-     className='flex justify-between bg-gray-50 border border-gray-100 px-3 py-2 rounded-md mb-3 mt-2'
+     className='flex justify-between px-3 py-2.5 rounded-xl mb-2 mt-2'
+     style={{
+       background: 'rgba(255,255,255,0.05)',
+       border: '1px solid rgba(255,255,255,0.08)',
+     }}
     >
-      <p className='text-xs text-black'>
-        <span className='text-xs text-gray-400 font-semibold mr-2'>
+      <p className='text-xs text-white/75'>
+        <span className='text-[10px] text-white/35 font-semibold mr-2'>
           {index < 9 ? `0${index + 1}`  : index + 1}
         </span>
         {item}
@@ -38,18 +42,19 @@ const TodoListInput = ({todoList,setTodoList}) => {
         handleDeleteOption(index);
       }}
       >
-        <HiOutlineTrash className='text-lg text-red-500'/>
+        <HiOutlineTrash className='text-base text-rose-400'/>
       </button>
     </div>
   ))}
 
-  <div className="flex items-center gap-5 mt-4">
+  <div className="flex items-center gap-3 mt-4">
     <input
      type="text"
     placeholder='Enter Task'
     value={option}
     onChange={({ target }) => setOption(target.value)}
-    className='w-full text-[13px] text-black outline-none bg-white border border-gray-100 px-3 py-2 rounded-md' 
+    className='w-full text-[13px] text-white/85 outline-none px-3 py-2 rounded-xl placeholder:text-white/30'
+    style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.10)' }}
     />
 
     <button className='card-btn text-nowrap' onClick={handleAddOption}>

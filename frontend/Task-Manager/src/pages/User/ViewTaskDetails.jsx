@@ -13,11 +13,11 @@ const ViewTaskDetails = () => {
   const getStatusTagColor = (status) => {
     switch (status) {
       case "In Progress":
-        return "text-cyan-500 bg-cyan-50 border border-cyan-500/10";
+        return "text-cyan-300 bg-cyan-500/15 border border-cyan-500/25";
       case "Completed":
-        return "text-lime-500 bg-lime-50 border border-lime-500/20";
+        return "text-green-300 bg-green-500/15 border border-green-500/25";
       default:
-        return "text-violet-500 bg-violet-50 border border-violet-500/10";
+        return "text-violet-300 bg-violet-500/15 border border-violet-500/25";
     }
   };
   // get Task info by ID
@@ -83,7 +83,7 @@ const ViewTaskDetails = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 mt-4">
             <div className="form-card col-span-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-sm md:text-xl font-medium">
+                <h2 className="text-sm md:text-xl font-bold text-white/90">
                   {task?.title}
                 </h2>
 
@@ -112,8 +112,8 @@ const ViewTaskDetails = () => {
                   />
 
                 </div>
-                <div className="col-span-6 md:col-span-4">
-                  <label className='text-xs font-medium text-slate-500'>
+                <div className='col-span-6 md:col-span-4'>
+                  <label className='text-[11px] font-semibold text-white/50 uppercase tracking-wider'>
                     Assigned To
                   </label>
 
@@ -128,7 +128,7 @@ const ViewTaskDetails = () => {
               </div>
 
               <div className="mt-2">
-                <label className='text-xs font-medium text-slate-500'>
+                <label className='text-[11px] font-semibold text-white/50 uppercase tracking-wider'>
                   Todo Checklist
                 </label>
 
@@ -144,7 +144,7 @@ const ViewTaskDetails = () => {
 
               {task?.attachments?.length > 0 && (
                 <div className="mt-2">
-                  <label className="text-xs font-medium text-slate-500">
+                <label className="text-[11px] font-semibold text-white/50 uppercase tracking-wider">
                     Attachments
                   </label>
 
@@ -171,9 +171,9 @@ export default ViewTaskDetails;
 const InfoBox = ({ label, value }) => {
   return (
     <>
-      <label className='text-xs font-medium text-slate-500 '>{label}</label>
+      <label className='text-[11px] font-semibold text-white/50 uppercase tracking-wider'>{label}</label>
 
-      <p className='text-[13px] md:text-[13px] font-medium text-gray-700 mt-0.5'>
+      <p className='text-[13px] md:text-[13px] font-medium text-white/80 mt-0.5'>
         {value}
       </p>
     </>
@@ -182,33 +182,34 @@ const InfoBox = ({ label, value }) => {
 
 const TodoCheckList = ({ text, isChecked, onChange }) => {
   return (
-    <div className='flex items-center gap-3'>
+    <div className='flex items-center gap-3 py-2' style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
       <input
         type='checkbox'
         checked={isChecked}
         onChange={onChange}
-        className='w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm outline-none cursor-pointer'
+        className='w-4 h-4 accent-blue-500 bg-white/10 border-white/20 rounded cursor-pointer'
       />
 
-      <p className='text-[13px] text-gray-800'>{text}</p>
+      <p className={`text-[13px] transition-all ${ isChecked ? 'line-through text-white/30' : 'text-white/75' }`}>{text}</p>
     </div>
   );
 }
 
 const Attachment = ({ link, index, onClick }) => {
   return <div
-    className="flex justify-between bg-gray-50 border border-gray-100 px-3 py-2 rounded-md mb-3 mt-2 cursor-pointer"
+    className="flex justify-between px-3 py-2.5 rounded-xl mb-2 mt-2 cursor-pointer transition-colors hover:bg-white/[0.05]"
+    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
     onClick={onClick}
   >
-    <div className="flex-1 flex items-center gap-3 border border-gray-100">
-      <span className="text-xs text-gray-400 font-semibold mr-2">
+    <div className="flex-1 flex items-center gap-3">
+      <span className="text-[10px] text-white/30 font-bold">
         {index < 9 ? `0${index + 1}` : index + 1}
       </span>
 
-      <p className="text-xs text-black">{link}</p>
+      <p className="text-xs text-white/65">{link}</p>
     </div>
 
-    <LuSquareArrowOutUpRight className="text-gray-400" />
+    <LuSquareArrowOutUpRight className="text-white/30" />
   </div>
 
 };
