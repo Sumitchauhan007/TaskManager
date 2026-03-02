@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import{SIDE_MENU_DATA, SIDE_MENU_USER_DATA} from '../../utils/data';
-import{ UserContext } from '../../context/UserContext';
+import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from '../../utils/data';
+import { UserContext } from '../../context/UserContext';
 import { useNavigate } from "react-router-dom";
 
 const SideMenu = ({ activeMenu, onMenuClick }) => {
@@ -25,10 +25,10 @@ const SideMenu = ({ activeMenu, onMenuClick }) => {
   };
 
   useEffect(() => {
-    if(user) {
+    if (user) {
       setSideMenuData(user?.role === 'admin' ? SIDE_MENU_DATA : SIDE_MENU_USER_DATA);
     }
-    return () => {};
+    return () => { };
   }, [user]);
 
   return (
@@ -62,11 +62,10 @@ const SideMenu = ({ activeMenu, onMenuClick }) => {
         {SideMenuData.map((item, index) => (
           <button
             key={`menu_${index}`}
-            className={`w-full flex items-center gap-3 text-[14px] rounded-lg py-2.5 px-4 mb-1 cursor-pointer transition-colors ${
-              activeMenu === item.label
+            className={`w-full flex items-center gap-3 text-[14px] rounded-lg py-2.5 px-4 mb-1 cursor-pointer transition-colors ${activeMenu === item.label
                 ? "text-primary bg-blue-50 border-r-4 border-primary font-medium"
                 : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-            }`}
+              }`}
             onClick={() => handleClick(item.path)}
           >
             <item.icon className="text-xl flex-shrink-0" />

@@ -1,7 +1,10 @@
 import React from 'react'
 import AvatarGroup from '../AvatarGroup';
+import Progress from '../Progress';
+import moment from 'moment';
+import { LuPaperclip } from 'react-icons/lu';
 
-const TaskCard = (
+const TaskCard = ({
 title,
 description,
 priority,
@@ -14,7 +17,7 @@ attachmentCount,
 completedTodoCount,
 todoChecklist,
 onClick
-) => {
+}) => {
 
 const getstatusTagColor = () => {
 switch (status) {
@@ -78,7 +81,7 @@ return <div className='bg-white rounded-xl py-4 shadow-md shadow-gray-100 border
             </span>
         </p>
 
-        <progress progress={progress} status={status}/>
+        <Progress progress={progress} status={status}/>
     </div>
 
     <div className="px-4">
@@ -93,7 +96,7 @@ return <div className='bg-white rounded-xl py-4 shadow-md shadow-gray-100 border
             <div>
                 <label className='text-xs text-gray-500'>Due Date</label>
                 <p className='text-[13px] font-medium text-gray-900'>
-                    {moment(dueData).format("Do MMM YYYY")}
+                    {moment(dueDate).format("Do MMM YYYY")}
                 </p>
             </div>
         </div>
