@@ -39,11 +39,20 @@ const TaskListTable = ({ tableData }) => {
         <tbody>
           {tableData.map((task) => (
             <tr
-              key={task.id}
+              key={task._id || task.id}
               className='transition-colors hover:bg-white/[0.03]'
               style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
             >
-              <td className='py-3 px-4 text-white/70 text-[13px] line-clamp-1 max-w-[200px] truncate'>{task.title}</td>
+              <td className='py-3 px-4 text-[13px] max-w-[200px]'>
+                <div className='flex items-center gap-2'>
+                  <span className='text-white/70 truncate'>{task.title}</span>
+                  {task.isPersonal && (
+                    <span className='shrink-0 px-1.5 py-0.5 text-[10px] font-bold rounded bg-violet-500/25 text-violet-300 border border-violet-500/40 tracking-wide'>
+                      PT
+                    </span>
+                  )}
+                </div>
+              </td>
               <td className='py-3 px-4'>
                 <span className={`px-2.5 py-1 text-[11px] font-medium rounded-full inline-block ${getStatusBadgeColor(task.status)}`}>{task.status}</span>
               </td>

@@ -28,6 +28,7 @@ const UserDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [pieChartData, setPieChartData] = useState([]);
   const [barChartData, setBarChartData] = useState([]);
+  const [personalTasks, setPersonalTasks] = useState([]);
 
   //chart data preparation
 
@@ -67,12 +68,27 @@ const UserDashboard = () => {
     }
   };
 
+  const getPersonalTasks = async () => {
+    try {
+      const response = await axiosInstance.get(API_PATHS.PERSONAL_TASKS.GET_ALL);
+      if (response.data) {
+        const tasks = Array.isArray(response.data)
+          ? response.data
+          : response.data.tasks || [];
+        setPersonalTasks(tasks.map((t) => ({ ...t, isPersonal: true })));
+      }
+    } catch (error) {
+      console.error("Error fetching personal tasks:", error);
+    }
+  };
+
   const onSeeMore = () => {
     navigate('/user/tasks')
   }
 
   useEffect(() => {
     getDashboardData();
+    getPersonalTasks();
 
     return () => { };
   }, []);
@@ -167,7 +183,10 @@ const UserDashboard = () => {
               </button>
             </div>
 
-            <TaskListTable tableData={dashboardData?.recentTasks || []} />
+            <TaskListTable tableData={[
+              ...(dashboardData?.recentTasks || []),
+              ...personalTasks,
+            ]} />
           </div>
         </div>
       </div>
